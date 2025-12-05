@@ -1,0 +1,37 @@
+Django>=5.0
+djangorestframework>=3.15.0
+djangorestframework-simplejwt>=5.3.1
+
+# CORS & Environment Variables
+django-cors-headers>=4.3.1
+python-dotenv>=1.0.1
+
+# Database & ORM
+psycopg2>=2.9.9       # For PostgreSQL (recommended)
+# OR use sqlite (default, no package needed)
+
+# Media & Image Handling
+Pillow>=10.0.0
+
+# File Storage (Optional: if using cloud)
+#django-storages>=1.14.3
+#boto3>=1.35.0          # For AWS S3 storage
+
+# API Documentation (Optional but useful)
+drf-yasg>=1.21.6
+
+# Payments (Optional - for Stripe integration)
+stripe>=10.0.0
+
+# Celery + Redis (Optional - for async tasks like order emails)
+celery>=5.3.6
+redis>=5.0.1
+
+# Deployment & Security
+gunicorn>=22.0.0       # For production server
+whitenoise>=6.7.0      # For static files
+django-environ>=0.11.2
+
+# Testing & Dev Tools
+pytest>=8.3.2
+pytest-django>=4.8.0
