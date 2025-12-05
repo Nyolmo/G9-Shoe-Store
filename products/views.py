@@ -4,6 +4,8 @@ from rest_framework import generics, permissions
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .filters import ProductFilter
+from users.throttles import BurstRateThrottle, SustainedRateThrottle
+from rest_framework.throttling import AnonRateThrottle
 
 class ProductListView(generics.ListAPIView):
     queryset = Product.objects.filter(is_active=True)
@@ -13,6 +15,7 @@ class ProductListView(generics.ListAPIView):
     filterset_class = ProductFilter
     search_fields = ['name', 'description']
     ordering_fields = ['price', 'created_at']
+    throttle_classes = [AnonRateThrottle,BurstRateThrottle,SustainedRateThrottle]
 
 
 class ProductCreateView(generics.CreateAPIView):

@@ -109,7 +109,25 @@ REST_FRAMEWORK = {
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+    
+
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'users.throttles.BurstRateThrottle',
+        'users.throttles.SustainedRateThrottle',
+
+    ],
+
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '30/minute',
+        'burst': '100/minute',
+        'sustained': '1000/hour',
+    },
+    
+
 }
+
+
 
 
 
