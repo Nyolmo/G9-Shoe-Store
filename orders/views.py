@@ -6,7 +6,6 @@ from .models import CartItem, Order, OrderItem
 from .serializers import CartItemSerializer, OrderItemSerializer, OrderSerializer
 from products.models import Product
 
-# 🛒 View Cart Items
 class CartListView(generics.ListAPIView):
     serializer_class = CartItemSerializer
     permission_classes = [IsAuthenticated]
@@ -15,7 +14,6 @@ class CartListView(generics.ListAPIView):
         return CartItem.objects.filter(user=self.request.user)
 
 
-# ➕ Add to Cart
 class AddToCartView(generics.CreateAPIView):
     serializer_class = CartItemSerializer
     permission_classes = [IsAuthenticated]
@@ -24,7 +22,6 @@ class AddToCartView(generics.CreateAPIView):
         serializer.save(user=self.request.user)
 
 
-# 🗑️ Remove from Cart
 class RemoveFromCartView(generics.DestroyAPIView):
     serializer_class = CartItemSerializer
     permission_classes = [IsAuthenticated]
@@ -33,7 +30,6 @@ class RemoveFromCartView(generics.DestroyAPIView):
         return CartItem.objects.filter(user=self.request.user)
 
 
-# 🧾 Create Order from Cart
 class CreateOrderView(generics.CreateAPIView):
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
@@ -54,7 +50,6 @@ class CreateOrderView(generics.CreateAPIView):
         return Response({'order_id': order.order_id}, status=status.HTTP_201_CREATED)
 
 
-# 📦 List User Orders
 class OrderListView(generics.ListAPIView):
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
@@ -70,7 +65,7 @@ class OrderDetailByPKView(generics.RetrieveAPIView):
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
 
-# 🔍 Lookup by UUID (order_id)
+
 class OrderDetailByUUIDView(generics.RetrieveAPIView):
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
